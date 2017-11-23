@@ -288,6 +288,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/Deploy-portal-router-and-wireless-access-point-device/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qiuyihao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qiuyihao's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/23/Deploy-portal-router-and-wireless-access-point-device/" itemprop="url">Deploy portal router and wireless access point device</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-23T16:23:50+08:00">
+                2017-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Core Router (CR)：TP-LINK TL-ER5110G<br>Access Point (AP)：TP-LINK TL-WVR308 (无线VPN路由器代替)</p>
+<h3 id="CR配置"><a href="#CR配置" class="headerlink" title="CR配置"></a>CR配置</h3><table>
+<thead>
+<tr>
+<th>接口名称</th>
+<th>IP地址</th>
+<th>子网掩码</th>
+<th>网关地址</th>
+<th>首选DNS服务器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WAN</td>
+<td>192.168.1.177</td>
+<td>255.255.255.0</td>
+<td>192.168.1.1</td>
+<td>192.168.1.1</td>
+</tr>
+<tr>
+<td>LAN</td>
+<td>192.168.88.1</td>
+<td>255.255.255.0</td>
+<td>–</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<h3 id="AP配置"><a href="#AP配置" class="headerlink" title="AP配置"></a>AP配置</h3><table>
+<thead>
+<tr>
+<th>接口名称</th>
+<th>IP地址</th>
+<th>子网掩码</th>
+<th>网关地址</th>
+<th>首选DNS服务器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WAN</td>
+<td>192.168.1.89</td>
+<td>255.255.255.0</td>
+<td>192.168.1.1</td>
+<td>192.168.1.1</td>
+</tr>
+<tr>
+<td>LAN</td>
+<td>192.168.89.1</td>
+<td>255.255.255.0</td>
+<td>–</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<pre><code>标注：
+  1. CR WAN接入工位网线，LAN1接入AP的LAN8 (切勿接入AP的WAN)，LAN2接入台式机；
+  2. AP关闭DHCP功能；
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/27/药不是糖/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1035,7 +1212,7 @@ hexo deploy
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">articles</span>
                 </a>
               </div>
@@ -1048,7 +1225,7 @@ hexo deploy
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
