@@ -181,7 +181,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Accueil
+            Startseite
           </a>
         </li>
       
@@ -191,7 +191,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            A propos
+            Über
           </a>
         </li>
       
@@ -211,7 +211,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Categories
+            Kategorien
           </a>
         </li>
       
@@ -221,7 +221,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -288,6 +288,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/26/How-to-deploy-a-wifidog-authorize-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qiuyihao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qiuyihao's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/26/How-to-deploy-a-wifidog-authorize-server/" itemprop="url">How to deploy a wifidog authorize server</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-26T17:58:56+08:00">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/2017/11/26/How-to-deploy-a-wifidog-authorize-server/1.png" alt=""></p>
+<h3 id="实现流程："><a href="#实现流程：" class="headerlink" title="实现流程："></a>实现流程：</h3><p>第一步：客户端连接网络，访问任意HTTP外网网页，客户端连接上网络后，打开浏览器访问任意HTTP外网网页，触发Portal认证。</p>
+<p>第二步：路由器拦截客户端访问外网的GET数据包，并重定向到WEB服务器。</p>
+<blockquote>
+<p>没有通过认证的客户端发往外网的GET数据包会被企业路由器拦截，并且会向客户端返回一条重定向条目（假设WEB服务器域名为www.abc.com）, 重定向条目为<a href="http://www.abc.com/?gw_address=xxx&amp;gw_port=xxx&amp;gw_id=xxx&amp;ip=xxx&amp;mac=xxx&amp;url=xxx。" target="_blank" rel="external">http://www.abc.com/?gw_address=xxx&amp;gw_port=xxx&amp;gw_id=xxx&amp;ip=xxx&amp;mac=xxx&amp;url=xxx。</a></p>
+<p>注意：若WEB服务器在路由器外网，URL地址需要在路由器设置免认证策略，若WEB服务器端口为非80端口，还需要将WEB服务器的端口设置免认证策略。</p>
+</blockquote>
+<p>第三步：客户端访问WEB服务器。客户端根据第二步返回的重定向条目与WEB服务器建立连接。</p>
+<p>第四步：WEB服务器向客户端返回认证页面。WEB服务器向无线终端返回认证登录页面，针对该认证登录页面，需满足以下规范：</p>
+<blockquote>
+<p>[1] 认证页面必须有一个Form的action= http:// LAN_IP: Port/wifidog/logincheck/，其中LAN_IP为当前企业路由器 LAN口的IP地址，Port为Portal服务端口，默认为8080；</p>
+<p>[2] 认证登录页面以Get方式提交Form表单；</p>
+<p>[3] 认证登录页面必须包含以下参数：</p>
+</blockquote>
+<p>&gt;<br>| 参数 | 说明 |<br>| — | — |<br>| user | 用户名 |<br>| pwd | 密码 |<br>| ip | 认证终端的IP地址 |<br>| mac | 认证终端的MAC地址 |<br>| authtype | 固定为“web”，表示web认证 |<br>| gw_address | 与重定向参数保持一致 |<br>| gw_port | 与重定向参数保持一致 |<br>| gw_id | 与重定向参数保持一致 |<br>| url | 与重定向参数保持一致 |</p>
+<p>第五步：客户端向路由器提交用户名和密码</p>
+<blockquote>
+<p>无线终端在认证登录页面填写用户名和密码后点击 登录 按钮，就以GET的方式将user、pwd等参数提交给路由器。</p>
+</blockquote>
+<p>第六步： 路由器向认证服务器提交认证信息</p>
+<blockquote>
+<p>路由器在获取客户端提交的信息之后，确定需要进行认证的设备，然后把所有的参数提交给认证服务器进行认证。</p>
+</blockquote>
+<p>第七步： 认证服务器向路由器返回认证结果</p>
+<blockquote>
+<p>认证服务器根据路由器提交的信息判断用户是否通过认证，并且向路由器返回认证结果。</p>
+</blockquote>
+<p>第八步： 路由器向客户端返回认证结果</p>
+<blockquote>
+<p>路由器根据认证服务器返回来的结果向无线终端返回相应的认证结果，若认证成功，路由器则根据之前获取的参数信息对相应设备的上网数据给予放行。</p>
+</blockquote>
+<p>Via: <a href="http://service.tp-link.com.cn/detail_article_3413.html" target="_blank" rel="external">http://service.tp-link.com.cn/detail_article_3413.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/Deploy-portal-router-and-wireless-access-point-device/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -317,7 +468,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-23T16:23:50+08:00">
                 2017-11-23
@@ -494,7 +645,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-27T20:16:20+08:00">
                 2017-10-27
@@ -623,7 +774,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-23T21:37:21+08:00">
                 2017-10-23
@@ -759,7 +910,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-13T10:27:37+08:00">
                 2017-10-13
@@ -952,7 +1103,7 @@ var_dump($decryptString);
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-11T11:45:02+08:00">
                 2017-10-11
@@ -1080,7 +1231,7 @@ var_dump($decryptString);
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-01T00:00:00+08:00">
                 2017-01-01
@@ -1212,8 +1363,8 @@ hexo deploy
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">articles</span>
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
             
@@ -1226,7 +1377,7 @@ hexo deploy
               <div class="site-state-item site-state-tags">
                 
                   <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">tags</span>
+                  <span class="site-state-item-name">Tags</span>
                 
               </div>
             
@@ -1274,7 +1425,7 @@ hexo deploy
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -1282,7 +1433,7 @@ hexo deploy
 
 
 
-  <div class="theme-info">Thème &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
 
 
 
