@@ -86,7 +86,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/27/Install-freeradius-on-CentOS-7-2/index.html">
 <meta property="og:site_name" content="qiuyihao&#39;s blog">
 <meta property="og:description" content="Step 1: install freeRadius yum install freeradius  Step 2: users configuration vi /etc/raddb/users  guest   Cleartext-Password := &amp;quot;guest-password&amp;quot;     Service-Type = Framed-User,     Framed-">
-<meta property="og:updated_time" content="2017-11-27T08:11:58.960Z">
+<meta property="og:updated_time" content="2017-11-27T08:13:46.589Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Install freeradius on CentOS 7.2">
 <meta name="twitter:description" content="Step 1: install freeRadius yum install freeradius  Step 2: users configuration vi /etc/raddb/users  guest   Cleartext-Password := &amp;quot;guest-password&amp;quot;     Service-Type = Framed-User,     Framed-">
@@ -381,7 +381,9 @@
         ipaddr          = 0.0.0.0
         secret          = 487dc4f4cf94bc9427fa441d86b82f53
 }
-</code></pre><h3 id="Step-4-test"><a href="#Step-4-test" class="headerlink" title="Step 4: test"></a>Step 4: test</h3><p>&gt;<br>radtest guest guest-password localhost 0 487dc4f4cf94bc9427fa441d86b82f53</p>
+</code></pre><h3 id="Step-4-test"><a href="#Step-4-test" class="headerlink" title="Step 4: test"></a>Step 4: test</h3><blockquote>
+<p>radtest guest guest-password localhost 0 487dc4f4cf94bc9427fa441d86b82f53</p>
+</blockquote>
 <pre><code>Sent Access-Request Id 200 from 0.0.0.0:64674 to 127.0.0.1:1812 length 75
     User-Name = &quot;guest&quot;
     User-Password = &quot;guest-password&quot;
