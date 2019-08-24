@@ -259,6 +259,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/24/Linux-Mount-data-disk-qcloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qiuyihao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qiuyihao's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/24/Linux-Mount-data-disk-qcloud/" itemprop="url">Linux: Mount data disk @ qcloud</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-24T17:14:24+08:00">
+                2017-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>➜ df -h
+
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        20G   17G  2.1G  89% /
+devtmpfs        1.9G     0  1.9G   0% /dev
+tmpfs           1.9G   24K  1.9G   1% /dev/shm
+tmpfs           1.9G   14M  1.9G   1% /run
+tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
+tmpfs           380M     0  380M   0% /run/user/0
+tmpfs           380M     0  380M   0% /run/user/1002
+
+
+➜ fdisk -l
+➜ fdisk /dev/vdb
+➜ n &gt; p &gt; 1 &gt; [enter] &gt; [enter] &gt; wq
+
+
+➜ mkfs.ext4 /dev/vdb
+
+
+➜ mkdir /data/vdb -p
+➜ mount /dev/vdb /data/vdb
+
+
+➜ yum install tree
+➜ tree /data
+/data
+└── vdb
+    └── lost+found
+
+2 directories, 0 files
+
+
+➜ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        20G   17G  2.1G  89% /
+devtmpfs        1.9G     0  1.9G   0% /dev
+tmpfs           1.9G   24K  1.9G   1% /dev/shm
+tmpfs           1.9G   14M  1.9G   1% /run
+tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
+tmpfs           380M     0  380M   0% /run/user/0
+tmpfs           380M     0  380M   0% /run/user/1002
+/dev/vdb        9.8G   37M  9.2G   1% /data/vdb
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/01/How-to-use-Hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -570,7 +754,7 @@ hexo deploy
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -631,7 +815,7 @@ hexo deploy
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
